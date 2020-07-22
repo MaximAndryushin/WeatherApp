@@ -10,12 +10,6 @@ import UIKit
 
 final class WeatherViewController: UIViewController {
     
-    // MARK: - Constants
-    
-    enum Colors {
-        static let blue = UIColor(red: 95/255, green: 170/255, blue: 230/255, alpha: 1)
-        static let white = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1)
-    }
 
     // MARK: - Properties
     
@@ -34,9 +28,11 @@ final class WeatherViewController: UIViewController {
         configureLabel(label: cityLabel, size: 30)
         configureLabel(label: weatherLabel, size: 50)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didSelectCity, object: nil)
+        
         //
         cityLabel.text = "Москва"
-        weatherLabel.text = "21"
+        weatherLabel.text = "21°"
         //
         
         setupStack()
@@ -76,7 +72,7 @@ final class WeatherViewController: UIViewController {
         let homeButton = UIButton()
         homeButton.setImage(UIImage(named: "icon_home.png"), for: .normal)
         homeButton.translatesAutoresizingMaskIntoConstraints = false
-        homeButton.addTarget(self, action: #selector(findWeatherByGeolocation), for: .touchUpInside)
+        homeButton.addTarget(self, action: #selector(tapFindWeatherByGeolocation), for: .touchUpInside)
         
         view.addSubview(homeButton)
         homeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
@@ -88,7 +84,7 @@ final class WeatherViewController: UIViewController {
         let menuButton = UIButton()
         menuButton.setImage(UIImage(named: "icon_menu.png"), for: .normal)
         menuButton.translatesAutoresizingMaskIntoConstraints = false
-        menuButton.addTarget(self, action: #selector(openMenu), for: .touchUpInside)
+        menuButton.addTarget(self, action: #selector(tapPresentCities), for: .touchUpInside)
         
         view.addSubview(menuButton)
         menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
@@ -98,16 +94,19 @@ final class WeatherViewController: UIViewController {
     
     // MARK: - Active
     
-    @objc private func findWeatherByGeolocation() {
+    @objc private func tapFindWeatherByGeolocation() {
         presenter.loadDataByGeolocation()
     }
     
-    @objc private func openMenu() {
-        presenter.openMenu()
+    @objc private func tapPresentCities() {
+        presenter.presentCities()
     }
     
-    @objc private func updateCity() {
-        
+    @objc private func onDidReceiveData(_ notification: Notification) {
+        guard let city = notification.object as? String else {
+            return
+        }
+        presenter.loadDataByCity(city: city)
     }
 }
 

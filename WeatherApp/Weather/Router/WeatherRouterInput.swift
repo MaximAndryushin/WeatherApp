@@ -9,5 +9,5 @@
 import UIKit
 
 protocol WeatherRouterInput {
-    func presentMenu()
+    func presentCities()
 }

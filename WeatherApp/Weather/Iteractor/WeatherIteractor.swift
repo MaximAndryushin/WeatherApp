@@ -18,6 +18,10 @@ final class WeatherIteractor {
 
 // MARK: - WeatherInteractorInput
 extension WeatherIteractor: WeatherIteractorInput {
+    func loadWeather(city: String) {
+        // Работа с Alamofire для определения погоды по городу
+    }
+    
     
     func loadCityAndWeatherByGeolocation() {
         // Работа с Alamofire для определения погоды по геопозиции

@@ -25,8 +25,12 @@ extension WeatherPresenter: WeatherViewOutput {
         iteractor.loadCityAndWeatherByGeolocation()
     }
     
-    func openMenu() {
-        router.presentMenu()
+    func loadDataByCity(city: String) {
+        iteractor.loadWeather(city: city)
+    }
+    
+    func presentCities() {
+        router.presentCities()
     }
 }
 

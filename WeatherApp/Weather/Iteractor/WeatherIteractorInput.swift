@@ -10,4 +10,5 @@ import UIKit
 
 protocol WeatherIteractorInput {
     func loadCityAndWeatherByGeolocation()
+    func loadWeather(city: String)
 }

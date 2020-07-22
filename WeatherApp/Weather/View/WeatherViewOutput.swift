@@ -10,5 +10,6 @@ import UIKit
 
 protocol WeatherViewOutput {
     func loadDataByGeolocation()
-    func openMenu()
+    func loadDataByCity(city: String)
+    func presentCities()
 }

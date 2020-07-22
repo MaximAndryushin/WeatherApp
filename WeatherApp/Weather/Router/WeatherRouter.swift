@@ -18,7 +18,9 @@ final class WeatherRouter {
 
 // MARK: - WeatherRouterInput
 extension WeatherRouter: WeatherRouterInput {
-    func presentMenu() {
-        // Здесь будет работа со вторым окном, где будет выбор городов
+    func presentCities() {
+        let citiesView = CitiesViewController()
+        citiesView.modalPresentationStyle = .overFullScreen
+        view.present(citiesView, animated: true)
     }
 }
