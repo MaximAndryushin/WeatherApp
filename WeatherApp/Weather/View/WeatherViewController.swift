@@ -30,15 +30,12 @@ final class WeatherViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didSelectCity, object: nil)
         
-        //
-        cityLabel.text = "Москва"
-        weatherLabel.text = "21°"
-        //
-        
         setupStack()
         setupButtonHome()
         setupButtonMenu()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         presenter.loadDataByGeolocation()
     }
     
@@ -113,14 +110,13 @@ final class WeatherViewController: UIViewController {
 
 // MARK: - WeatherViewInput
 extension WeatherViewController: WeatherViewInput {
-    func succes(city: String, weather: String) {
+    func success(city: String, weather: String) {
         cityLabel.text = city
         weatherLabel.text = weather
     }
     
     func failure() {
         let alert = UIAlertController(title: "Ошибка", message: "Не удалось получить данные", preferredStyle: .alert)
-
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }

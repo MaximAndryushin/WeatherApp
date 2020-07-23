@@ -38,7 +38,7 @@ extension WeatherPresenter: WeatherViewOutput {
 // MARK: - WeatherInteractorOutput
 extension WeatherPresenter: WeatherIteractorOutput {
     func succes(city: String, weather: String) {
-        view.succes(city: city, weather: weather)
+        view.success(city: city, weather: weather)
     }
     
     func failure() {

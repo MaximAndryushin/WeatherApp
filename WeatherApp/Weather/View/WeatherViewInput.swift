@@ -9,6 +9,6 @@
 import UIKit
 
 protocol WeatherViewInput: AnyObject {
-    func succes(city: String, weather: String)
+    func success(city: String, weather: String)
     func failure()
 }
