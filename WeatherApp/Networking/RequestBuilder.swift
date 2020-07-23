@@ -45,14 +45,26 @@ extension RequestBuilder {
 
 enum TemperatureProvider: RequestBuilder {
     
-    case getTemperature(lat: Double, lon: Double)
+    case getTemperatureByCoordinates(lat: Double, lon: Double)
+    case getTemperature(city: String)
     case doSmth
+    
+    private var APPID: String {
+        return "ed2774029f852baf983475a7878071a3"
+    }
+    
+    enum temperatureMetric {
+        static let celcius = "metric"
+        static let kelvin = "default"
+        static let fahrenheit = "imperial"
+    }
+    
     var baseURL: String {
-        return "https://fcc-weather-api.glitch.me"
+        return "http://api.openweathermap.org"
     }
     
     var path: String {
-        return "/api/current"
+        return "/data/2.5/weather"
     }
     
     var headers: HTTPHeaders? {
@@ -61,10 +73,18 @@ enum TemperatureProvider: RequestBuilder {
     
     var parameters: Parameters? {
         switch  self {
-        case .getTemperature(let lat, let lon):
+        case .getTemperatureByCoordinates(let lat, let lon):
             return [
                 "lon": lon,
-                "lat": lat
+                "lat": lat,
+                "appid": APPID,
+                "units": temperatureMetric.celcius
+            ]
+        case .getTemperature(let city):
+            return [
+                "appid": APPID,
+                "q": city,
+                "units": temperatureMetric.celcius
             ]
         default:
             return nil

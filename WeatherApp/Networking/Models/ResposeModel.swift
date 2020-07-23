@@ -6,6 +6,8 @@
 //  Copyright © 2020 Kirill+Maxim. All rights reserved.
 //
 
+import Foundation
+
 // MARK: - Response
 struct Response: Codable {
     let coord: Coord
@@ -17,7 +19,7 @@ struct Response: Codable {
     let clouds: Clouds
     let dt: Int
     let sys: Sys
-    let id: Int
+    let timezone, id: Int
     let name: String
     let cod: Int
 }
@@ -34,19 +36,21 @@ struct Coord: Codable {
 
 // MARK: - Main
 struct Main: Codable {
-    let temp, pressure, humidity, tempMin, tempMax: Double
-    
+    let temp, feelsLike, tempMin, tempMax: Double
+    let pressure, humidity: Int
+
     enum CodingKeys: String, CodingKey {
-        case temp, pressure, humidity
+        case temp
+        case feelsLike = "feels_like"
         case tempMin = "temp_min"
         case tempMax = "temp_max"
+        case pressure, humidity
     }
 }
 
 // MARK: - Sys
 struct Sys: Codable {
     let type, id: Int
-    let message: Double?
     let country: String
     let sunrise, sunset: Int
 }
@@ -54,16 +58,16 @@ struct Sys: Codable {
 // MARK: - Weather
 struct Weather: Codable {
     let id: Int
-    let main, weatherDescription: String
-    
+    let main, weatherDescription, icon: String
+
     enum CodingKeys: String, CodingKey {
         case id, main
         case weatherDescription = "description"
+        case icon
     }
 }
 
 // MARK: - Wind
 struct Wind: Codable {
-    let speed: Double
-    let deg: Int
+    let speed, deg: Double
 }
