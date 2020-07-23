@@ -56,7 +56,6 @@ extension CitiesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        NotificationCenter.default.post(name: .didSelectCity, object: cities[indexPath.row])
         return configureCell(indexPath: indexPath)
     }
     
@@ -71,6 +70,7 @@ extension CitiesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        NotificationCenter.default.post(name: .didSelectCity, object: cities[indexPath.row])
         dismiss(animated: true, completion: nil)
     }
 }
