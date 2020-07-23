@@ -40,6 +40,7 @@ final class WeatherViewController: UIViewController {
         setupButtonMenu()
         
         presenter.loadDataByGeolocation()
+        presenter.loadDataByCity(city: "Moscow")
     }
     
     // MARK: - Configuratios

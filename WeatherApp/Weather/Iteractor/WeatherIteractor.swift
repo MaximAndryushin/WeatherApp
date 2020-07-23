@@ -13,6 +13,8 @@ final class WeatherIteractor {
     // MARK: Properties
     
     weak var presenter: WeatherIteractorOutput!
+    let serviceProvider = ServiceProvider<TemperatureProvider>()
+
 }
 
 
@@ -20,6 +22,16 @@ final class WeatherIteractor {
 extension WeatherIteractor: WeatherIteractorInput {
     func loadWeather(city: String) {
         // Работа с Alamofire для определения погоды по городу
+        
+        serviceProvider.load(service: .getTemperature(lat: 55.75, lon: 37.62), decodeType: Response.self) {
+            result in
+            switch result {
+            case .success(let response):
+                self.presenter.succes(city: response.name, weather: String(response.main.temp) + "° C")
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     
