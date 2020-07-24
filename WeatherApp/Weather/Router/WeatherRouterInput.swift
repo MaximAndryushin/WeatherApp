@@ -6,8 +6,6 @@
 //  Copyright © 2020 Kirill+Maxim. All rights reserved.
 //
 
-import UIKit
-
 protocol WeatherRouterInput {
     func presentCities()
 }

@@ -27,12 +27,11 @@ final class WeatherViewController: UIViewController {
         
         configureLabel(label: cityLabel, size: 30)
         configureLabel(label: weatherLabel, size: 50)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didSelectCity, object: nil)
-        
         setupStack()
         setupButtonHome()
         setupButtonMenu()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didSelectCity, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

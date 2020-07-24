@@ -44,6 +44,7 @@ extension LocationManager: CLLocationManagerDelegate {
     }
 }
 
+
 //MARK: - GetLocation
 extension LocationManager {
     func getLocation() -> (Double?, Double?) {
