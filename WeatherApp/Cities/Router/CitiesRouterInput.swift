@@ -8,4 +8,5 @@
 
 protocol CitiesRouterInput {
     func dismissCities()
+    func presentFailureAlert(title: String, message: String)
 }

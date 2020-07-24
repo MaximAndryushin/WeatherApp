@@ -8,4 +8,5 @@
 
 protocol WeatherRouterInput {
     func presentCities()
+    func presentFailureAlert(title: String, message: String)
 }

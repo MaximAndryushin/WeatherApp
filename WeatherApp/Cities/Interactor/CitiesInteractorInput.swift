@@ -9,5 +9,5 @@
 protocol CitiesInteractorInput {
     func loadCities(country: String)
     func updateWeather(city: String)
-    func searchCity(city: String, cities: [String])
+    func searchCity(citySearch: String, country: String)
 }

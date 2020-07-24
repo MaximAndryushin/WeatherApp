@@ -6,6 +6,8 @@
 //  Copyright © 2020 Kirill+Maxim. All rights reserved.
 //
 
+import UIKit
+
 final class CitiesRouter {
     
     // MARK: - Properties
@@ -14,6 +16,12 @@ final class CitiesRouter {
 }
 
 extension CitiesRouter: CitiesRouterInput {
+    func presentFailureAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        view.present(alert, animated: true, completion: nil)
+    }
+    
     func dismissCities() {
         view.dismiss(animated: true, completion: nil)
     }

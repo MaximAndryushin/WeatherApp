@@ -9,7 +9,7 @@
 import UIKit
 
 final class CitiesViewController: UIViewController {
-
+    
     // MARK: - Constants
     
     private let identifier = "CountryCell"
@@ -44,7 +44,16 @@ final class CitiesViewController: UIViewController {
         searchBar.delegate = self
         searchBar.searchBarStyle = .default
         searchBar.placeholder = "Поиск"
-        searchBar.sizeToFit()
+        searchBar.barTintColor = Colors.blue
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(searchBar)
+        
+        NSLayoutConstraint.activate([
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        ])
     }
     
     private func configureTableView() {
@@ -52,10 +61,9 @@ final class CitiesViewController: UIViewController {
         tableCity.delegate = self
         tableCity.translatesAutoresizingMaskIntoConstraints = false
         tableCity.backgroundColor = Colors.blue
-        tableCity.tableHeaderView = searchBar
         view.addSubview(tableCity)
         NSLayoutConstraint.activate([
-            tableCity.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableCity.topAnchor.constraint(equalTo: searchBar.safeAreaLayoutGuide.bottomAnchor),
             tableCity.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableCity.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableCity.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -77,7 +85,7 @@ extension CitiesViewController: UITableViewDataSource, UITableViewDelegate {
     
     private func configureCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableCity.dequeueReusableCell(withIdentifier: identifier)
-                    ?? UITableViewCell(style: .default, reuseIdentifier: identifier)
+            ?? UITableViewCell(style: .default, reuseIdentifier: identifier)
         cell.backgroundColor = Colors.blue
         let item = cities[indexPath.row]
         cell.textLabel?.text = item
@@ -98,18 +106,19 @@ extension CitiesViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        presenter.searchCity(city: searchBar.text!, cities: cities)
-        closeSearch()
+        presenter.searchCity(citySearch: searchBar.text!, country: "RU")
+        searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        closeSearch()
-    }
-    
-    private func closeSearch() {
+        presenter.loadCities(country: "RU")
         searchBar.text = nil
         searchBar.showsCancelButton = false
         searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.searchCity(citySearch: searchText, country: "RU")
     }
 }
 
@@ -121,8 +130,6 @@ extension CitiesViewController: CitiesViewInput {
     }
     
     func failure() {
-        let alert = UIAlertController(title: "Ошибка", message: "Не удалось получить список городов", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        presenter.presentFailureAlert(title: "Ошибка", message: "Не удалось получить список городов")
     }
 }

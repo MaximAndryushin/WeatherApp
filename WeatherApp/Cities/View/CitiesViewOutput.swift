@@ -9,5 +9,6 @@
 protocol CitiesViewOutput{
     func loadCities(country: String)
     func presentCity(city: String)
-    func searchCity(city: String, cities: [String])
+    func searchCity(citySearch: String, country: String)
+    func presentFailureAlert(title: String, message: String)
 }

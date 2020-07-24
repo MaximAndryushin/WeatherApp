@@ -20,6 +20,9 @@ final class WeatherPresenter {
 
 // MARK: - WeatherViewOutput
 extension WeatherPresenter: WeatherViewOutput {
+    func presentFailureAlert(title: String, message: String) {
+        router.presentFailureAlert(title: title, message: message)
+    }
     
     func loadDataByGeolocation() {
         interactor.loadCityAndWeatherByGeolocation()

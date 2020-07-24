@@ -115,8 +115,6 @@ extension WeatherViewController: WeatherViewInput {
     }
     
     func failure() {
-        let alert = UIAlertController(title: "Ошибка", message: "Не удалось получить данные", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        presenter.presentFailureAlert(title: "Ошибка", message: "Не удалось получить данные")
     }
 }

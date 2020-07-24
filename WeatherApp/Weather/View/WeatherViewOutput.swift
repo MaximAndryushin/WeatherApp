@@ -10,4 +10,5 @@ protocol WeatherViewOutput {
     func loadDataByGeolocation()
     func loadDataByCity(city: String)
     func presentCities()
+    func presentFailureAlert(title: String, message: String)
 }

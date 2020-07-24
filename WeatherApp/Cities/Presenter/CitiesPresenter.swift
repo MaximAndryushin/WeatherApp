@@ -18,8 +18,12 @@ final class CitiesPresenter {
 
 // MARK: - CitiesViewOutput
 extension CitiesPresenter: CitiesViewOutput {
-    func searchCity(city: String, cities: [String]) {
-        interactor.searchCity(city: city, cities: cities)
+    func presentFailureAlert(title: String, message: String) {
+        router.presentFailureAlert(title: title, message: message)
+    }
+    
+    func searchCity(citySearch: String, country: String) {
+        interactor.searchCity(citySearch: citySearch, country: country)
     }
     
     func loadCities(country: String) {

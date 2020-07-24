@@ -6,6 +6,8 @@
 //  Copyright © 2020 Kirill+Maxim. All rights reserved.
 //
 
+import UIKit
+
 final class WeatherRouter {
     
     // MARK: - Properties
@@ -20,5 +22,11 @@ extension WeatherRouter: WeatherRouterInput {
         let citiesView = CitiesAssembly.assembly()
         citiesView.modalPresentationStyle = .overFullScreen
         view.present(citiesView, animated: true)
+    }
+    
+    func presentFailureAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        view.present(alert, animated: true, completion: nil)
     }
 }
