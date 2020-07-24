@@ -13,20 +13,23 @@ final class WeatherPresenter {
     // MARK: - Properties
     
     weak var view: WeatherViewInput!
-    var iteractor: WeatherIteractorInput!
+    var interactor: WeatherInteractorInput!
     var router: WeatherRouterInput!
 }
 
 
 // MARK: - WeatherViewOutput
 extension WeatherPresenter: WeatherViewOutput {
+    func presentFailureAlert(title: String, message: String) {
+        router.presentFailureAlert(title: title, message: message)
+    }
     
     func loadDataByGeolocation() {
-        iteractor.loadCityAndWeatherByGeolocation()
+        interactor.loadCityAndWeatherByGeolocation()
     }
     
     func loadDataByCity(city: String) {
-        iteractor.loadWeather(city: city)
+        interactor.loadWeather(city: city)
     }
     
     func presentCities() {
@@ -36,7 +39,7 @@ extension WeatherPresenter: WeatherViewOutput {
 
 
 // MARK: - WeatherInteractorOutput
-extension WeatherPresenter: WeatherIteractorOutput {
+extension WeatherPresenter: WeatherInteractorOutput {
     func succes(city: String, weather: String) {
         view.success(city: city, weather: weather)
     }

@@ -17,9 +17,9 @@ final class WeatherAssembly {
         view.presenter = presenter
         presenter.view = view
         
-        let interactor = WeatherIteractor()
+        let interactor = WeatherInteractor(service: ServiceProvider<TemperatureProvider>())
         interactor.presenter = presenter
-        presenter.iteractor = interactor
+        presenter.interactor = interactor
         
         let router = WeatherRouter()
         router.view = view

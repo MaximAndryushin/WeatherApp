@@ -27,12 +27,11 @@ final class WeatherViewController: UIViewController {
         
         configureLabel(label: cityLabel, size: 30)
         configureLabel(label: weatherLabel, size: 50)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didSelectCity, object: nil)
-        
         setupStack()
         setupButtonHome()
         setupButtonMenu()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didSelectCity, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -116,8 +115,6 @@ extension WeatherViewController: WeatherViewInput {
     }
     
     func failure() {
-        let alert = UIAlertController(title: "Ошибка", message: "Не удалось получить данные", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        presenter.presentFailureAlert(title: "Ошибка", message: "Не удалось получить данные")
     }
 }

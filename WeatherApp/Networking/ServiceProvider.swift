@@ -19,7 +19,7 @@ enum Result<T: Codable> {
 
 //MARK: - Service Provider
 
-class ServiceProvider<T: RequestBuilder> {
+final class ServiceProvider<T: RequestBuilder> {
     
     func load<U: Codable>(service: T, decodeType: U.Type, completion: @escaping (Result<U>) -> ()) {
         guard let request = service.urlRequest else { return }

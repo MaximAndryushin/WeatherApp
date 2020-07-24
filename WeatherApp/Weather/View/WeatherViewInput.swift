@@ -6,8 +6,6 @@
 //  Copyright © 2020 Kirill+Maxim. All rights reserved.
 //
 
-import UIKit
-
 protocol WeatherViewInput: AnyObject {
     func success(city: String, weather: String)
     func failure()
