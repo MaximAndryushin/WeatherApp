@@ -22,12 +22,12 @@ extension CitiesPresenter: CitiesViewOutput {
         router.presentFailureAlert(title: title, message: message)
     }
     
-    func searchCity(citySearch: String, country: String) {
-        interactor.searchCity(citySearch: citySearch, country: country)
+    func searchCity(citySearch: String) {
+        interactor.searchCity(citySearch: citySearch)
     }
     
-    func loadCities(country: String) {
-        interactor.loadCities(country: country)
+    func loadCities() {
+        interactor.loadCities()
     }
     
     func presentCity(city: String) {

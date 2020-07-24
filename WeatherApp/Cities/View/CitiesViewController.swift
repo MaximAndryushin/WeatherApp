@@ -33,7 +33,7 @@ final class CitiesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.loadCities(country: "RU")
+        presenter.loadCities()
         configureSearchBar()
         configureTableView()
     }
@@ -106,19 +106,19 @@ extension CitiesViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        presenter.searchCity(citySearch: searchBar.text!, country: "RU")
+        presenter.searchCity(citySearch: searchBar.text!)
         searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        presenter.loadCities(country: "RU")
+        presenter.loadCities()
         searchBar.text = nil
         searchBar.showsCancelButton = false
         searchBar.resignFirstResponder()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.searchCity(citySearch: searchText, country: "RU")
+        presenter.searchCity(citySearch: searchText)
     }
 }
 

@@ -8,11 +8,15 @@
 
 final class WeatherInteractor {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak var presenter: WeatherInteractorOutput!
-    let serviceProvider = ServiceProvider<TemperatureProvider>()
-    let locationManager = LocationManager()
+    private let serviceProvider: ServiceProvider<TemperatureProvider>
+    private let locationManager = LocationManager.shared
+    
+    init(service: ServiceProvider<TemperatureProvider>) {
+        serviceProvider = service
+    }
 }
 
 
