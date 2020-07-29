@@ -1,5 +1,5 @@
 //
-//  WeatherIteractorInput.swift
+//  WeatherInteractorInput.swift
 //  WeatherApp
 //
 //  Created by Kirill Selivanov on 20.07.2020.
