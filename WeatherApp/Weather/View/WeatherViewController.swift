@@ -66,6 +66,7 @@ final class WeatherViewController: UIViewController {
     private func setupButtonHome() {
         
         let homeButton = UIButton()
+        homeButton.accessibilityIdentifier = AccessibilityIdentifier.home.rawValue
         homeButton.setImage(UIImage(named: "icon_home.png"), for: .normal)
         homeButton.translatesAutoresizingMaskIntoConstraints = false
         homeButton.addTarget(self, action: #selector(tapFindWeatherByGeolocation), for: .touchUpInside)
@@ -78,6 +79,7 @@ final class WeatherViewController: UIViewController {
     private func setupButtonMenu() {
         
         let menuButton = UIButton()
+        menuButton.accessibilityIdentifier = AccessibilityIdentifier.menu.rawValue
         menuButton.setImage(UIImage(named: "icon_menu.png"), for: .normal)
         menuButton.translatesAutoresizingMaskIntoConstraints = false
         menuButton.addTarget(self, action: #selector(tapPresentCities), for: .touchUpInside)
