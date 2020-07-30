@@ -11,6 +11,8 @@ final class WeatherInteractor {
     // MARK: - Properties
     
     weak var presenter: WeatherInteractorOutput!
+    
+    //IDK how to confirm ptotocol by generic class (violation of Dependency inversion)
     private let serviceProvider: ServiceProvider<TemperatureProvider>
     private let locationManager = LocationManager.shared
     

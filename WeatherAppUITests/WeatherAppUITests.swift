@@ -25,11 +25,47 @@ class WeatherAppUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testExample() throws {
+    func testWeatherView() throws {
         let app = XCUIApplication()
         app.launch()
         
         weatherPage.tapButton(accessibilityIdentifier: "home")
         weatherPage.tapButton(accessibilityIdentifier: "menu")
+    
+    }
+    
+    func testCitiesView() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        weatherPage.tapButton(accessibilityIdentifier: "menu")
+
+        let tableQuery = app.tables
+        let exists = NSPredicate(format: "count > 0")
+        
+
+        expectation(for: exists, evaluatedWith: tableQuery.cells, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        let cells = tableQuery.cells
+        var used = Set<Int>()
+        
+        var iter = 0
+        
+        //Check all cells in random order
+        while iter < cells.count {
+            
+            var id: Int
+            repeat {
+                id = Int.random(in: (0..<cells.count))
+            } while used.contains(id)
+            used.insert(id)
+            
+            cells.element(boundBy: id).tap()
+            
+            weatherPage.tapButton(accessibilityIdentifier: "menu")
+            
+            Bool.random() ? cells.element(boundBy: Int.random(in: (0..<cells.count))).swipeUp() : cells.element(boundBy: Int.random(in: (0..<cells.count))).swipeDown()
+            iter += 1
+        }
     }
 }
